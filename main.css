@@ -68,6 +68,9 @@ body {
     bottom: 20px;
     right: 20px;
     height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .sticker {
@@ -363,8 +366,11 @@ body {
 
     .myAI {
         height: 60px;
+        width: 60px;
         bottom: 10px;
         right: 10px;
+        object-fit: cover;
+        border-radius: 50%;
     }
 
     .recieve {
@@ -420,7 +426,7 @@ body {
     }
 
     .falling-text {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .sticker {
@@ -454,6 +460,9 @@ body {
 
     .myAI {
         height: 50px;
+        width: 50px;
+        object-fit: cover;
+        border-radius: 50%;
     }
 
     .recieve {
@@ -465,7 +474,7 @@ body {
     }
 
     .falling-text {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .content {
