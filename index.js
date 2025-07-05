@@ -243,10 +243,10 @@ const fallingTexts = [
     "💝 Cảm ơn chị đã dành thời gian choa em nhaaa",  // Trái tim có ruy băng
     "💗 Em được đi nhiều quán ăn, nhiều trải nhiệm lần đầu được thử",  // Trái tim đang lớn
     "💓 Ở bên chị bao nhiêu cũng không làm em thấy đủ :((",  // Trái tim đập
-    "💞 Thật sự em mong tới ngày em được được gặp chị nhiều hơn nữa",  // Trái tim xoay
-    "💟 Mong là em có thể được gặp chị nhiều hơn nữa",  // Trái tim trang trí
+    "💞 Thật mong tới ngày em được được gặp chị",  // Trái tim xoay
+    "💟 Thời gian đi chơi với chị trôi nhanh quá à -.-",  // Trái tim trang trí
     "💜 Mong rằng em sẽ có thể ở bên chị nhiều hơn nữa",  // Trái tim tím
-    "💙 Aii đó chii là dễ thương rùii ạaa"   // Trái tim xanh
+    "💙 Aii đó quá chii là dễ thương rùii ạaa <3"   // Trái tim xanh
 ];
 
 // Hàm tạo text trái tim rơi từ trên xuống
