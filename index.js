@@ -303,16 +303,14 @@ audioPlayer.classList.add('show');
 
 // Hàm phát nhạc
 function playMusic() {
-    backgroundMusic.play().then(() => {
+    backgroundMusic.play()
+      .then(() => {
         isMusicPlaying = true;
         musicToggle.textContent = '🔊';
         musicToggle.classList.add('playing');
-    }).catch(error => {
-        console.log('Không thể phát nhạc:', error);
-        // Nếu không có file nhạc, ẩn audio player
-        audioPlayer.style.display = 'none';
-    });
-}
+      })
+      .catch(err => console.warn('Play blocked', err));
+  }
 
 // Hàm dừng nhạc
 function pauseMusic() {
@@ -320,8 +318,16 @@ function pauseMusic() {
     isMusicPlaying = false;
     musicToggle.textContent = '🎵';
     musicToggle.classList.remove('playing');
-}
-
+  }
+  
+  musicToggle.addEventListener('click', () =>
+    isMusicPlaying ? pauseMusic() : playMusic()
+  );
+  const firstGesture = () => {
+    playMusic();                // cố phát
+    document.removeEventListener('pointerdown', firstGesture);
+  };
+  document.addEventListener('pointerdown', firstGesture, { once: true });
 // Hàm toggle nhạc
 function toggleMusic() {
     if (isMusicPlaying) {
@@ -347,10 +353,58 @@ youtubeBtn.addEventListener('click', openYouTube);
 backgroundMusic.volume = 0.3; // 30% âm lượng
 
 // Tự động phát nhạc khi trang web được tải
-document.addEventListener('DOMContentLoaded', function() {
-    // Delay 1 giây để đảm bảo trang web đã tải xong
-    setTimeout(() => {
-        playMusic();
-    }, 1000);
-});
-
+document.addEventListener('DOMContentLoaded', () => {
+    // ====== Grab DOM ======
+    const bg        = document.getElementById('backgroundMusic');
+    const btnMusic  = document.getElementById('musicToggle');
+    const btnYT     = document.getElementById('youtubeBtn');
+    const playerUI  = document.querySelector('.audio-player');
+  
+    // ====== UI ready ======
+    playerUI.classList.add('show');
+    bg.volume = 0.3;
+  
+    // ====== State ======
+    let playing = false;
+  
+    // ====== Controls ======
+    const play  = () =>
+      bg.play()
+        .then(() => {
+          playing = true;
+          btnMusic.textContent = '🔊';
+          btnMusic.classList.add('playing');
+        })
+        .catch(e => console.warn('Play blocked', e));
+  
+    const pause = () => {
+      bg.pause();
+      playing = false;
+      btnMusic.textContent = '🎵';
+      btnMusic.classList.remove('playing');
+    };
+  
+    const toggle = () => (playing ? pause() : play());
+  
+    // ====== Events ======
+    btnMusic.addEventListener('click', toggle);
+  
+    // Gesture đầu tiên để “mở khóa” autoplay
+    document.addEventListener(
+      'pointerdown',
+      function firstGesture() {
+        play();
+        document.removeEventListener('pointerdown', firstGesture);
+      },
+      { once: true }
+    );
+  
+    // Nút mở YouTube
+    btnYT.addEventListener('click', () =>
+      window.open(
+        'https://www.youtube.com/watch?v=LG5hQJsO8k0&list=RDLG5hQJsO8k0&start_radio=1',
+        '_blank'
+      )
+    );
+  });
+  
